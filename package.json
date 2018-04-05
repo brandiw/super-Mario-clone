@@ -1,0 +1,23 @@
+{
+  "name": "super-mario-clone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve ./public",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thegreatsantini/super-Mario-clone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thegreatsantini/super-Mario-clone/issues"
+  },
+  "homepage": "https://github.com/thegreatsantini/super-Mario-clone#readme",
+  "dependencies": {
+    "serve": "^6.5.3"
+  }
+}
