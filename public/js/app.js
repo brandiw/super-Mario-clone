@@ -1,56 +1,52 @@
 import Compositor from "./Compositor.js";
 import Entity from "./Entity.js";
+import Timer from "./Timer.js "
 import { loadLevel } from "./loaders.js";
-import { loadMarioSprite, loadBackgroundSprites } from "./sprites.js";
+import { createMario } from "./entities.js";
+import { loadBackgroundSprites } from "./sprites.js";
 import { createBackgroundLayer } from "./layers.js";
+import { createSpriteLayer } from "./layers.js"
+
+window.addEventListener('keydown', (e)=>{
+  console.log(e)
+})
 
 const canvas = document.getElementById("screen");
 const context = canvas.getContext("2d");
 
-function createSpriteLayer(entity) {
-  return function drawSpriteLayer(context) {
-    entity.draw(context);
-  };
-}
-
 // loading two functions in parallel, would like to review this more in depth
 Promise.all([
-  loadMarioSprite(),
+  createMario(),
   loadBackgroundSprites(),
   loadLevel("1-1")
-]).then(([marioSprite, backgroundSprites, level]) => {
+]).then(([mario, backgroundSprites, level]) => {
   const comp = new Compositor();
 
   const backgroundLayer = createBackgroundLayer(
     level.backgrounds,
     backgroundSprites
   );
+  // draw background layer
   comp.layers.push(backgroundLayer);
 
-  const gravity = 0.5;
-
-  const mario = new Entity();
+  const gravity = 2000;
   mario.pos.set(64, 180);
-  mario.vel.set(2, -10);
-
-  mario.draw = function draw(context) {
-    marioSprite.draw("idle", context, this.pos.x, this.pos.y);
-  };
-
-  mario.update = function updateMario() {
-    this.pos.x += this.vel.x;
-    this.pos.y += this.vel.y;
-  };
+  mario.vel.set(200, -600);
 
   const spriteLayer = createSpriteLayer(mario);
+  // draw mario layer
   comp.layers.push(spriteLayer);
 
-  function update() {
+  // setting constant Frame rate with time would like to review this in the future,
+  //  passed into updateMario in enities,js
+  const timer = new Timer(1 / 60);
+  timer.update = function update(deltaTime) {
+    mario.update(deltaTime);
+    
     comp.draw(context);
-    mario.update();
-    mario.vel.y += gravity;
-    requestAnimationFrame(update);
+
+    mario.vel.y += gravity * deltaTime;
   }
 
-    // update();
+  timer.start();
 });
