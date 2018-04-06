@@ -7,37 +7,42 @@ export default class SpriteSheet {
     this.tiles = new Map();
   }
   // buffer where we keep the tile
-  define(name, x, y) {
+  define(name, x, y, width, height) {
     // creating element like in line canvas id(screen) but created progamatically
     const buffer = document.createElement("canvas");
     // setting width and height of canvas
-    buffer.width = this.width;
-    buffer.height = this.height;
+    buffer.width = width;
+    buffer.height = height;
     // drawing subset of image
     buffer.getContext("2d").drawImage(
       this.image,
-      x * this.width,
-      y * this.height,
+      x,
+      y,
       // size of subset
-      this.width,
-      this.height,
+      width,
+      height,
       // full buffer of subset
       0,
       0,
-      this.width,
-      this.height
+      width,
+      height
     );
     // saving buffer to map
     this.tiles.set(name, buffer);
   }
+
+  defineTile(name, x, y) {
+    this.define( name, x * this.width, y * this.height, this.width, this.height )
+  }
+
   // draw
   draw(name, context, x, y) {
     // retrieve buffer from tilesets
     const buffer = this.tiles.get(name);
     context.drawImage(buffer, x, y);
   }
-      // used to handle tile size
-    drawTile(name, context, x, y) {
-      this.draw(name, context, x * this.width, y * this.height)
-    }  
+  // used to handle tile size
+  drawTile(name, context, x, y) {
+    this.draw(name, context, x * this.width, y * this.height)
+  }
 }
