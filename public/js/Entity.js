@@ -19,7 +19,7 @@ export default class Entity {
         this.traits = [];
     }
 // composition vd4 min15:33
-    addTraits(trait) {
+    addTrait(trait) {
         this.traits.push(trait);
         this[trait.NAME] = trait;
     }
