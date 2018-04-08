@@ -24,7 +24,7 @@ export default class TileCollider {
     );
 // vid 5 min111
     matches.forEach(match => {
-      if (match.tile.name !== "ground") {
+      if (match.tile.type !== "ground") {
         return;
       }
 // x1 is number from tileResolver
@@ -60,7 +60,7 @@ export default class TileCollider {
     );
  // vid 5 min106
     matches.forEach(match => {
-      if (match.tile.name !== "ground") {
+      if (match.tile.type !== "ground") {
         return;
       }
 // y1 is number from tileResolver

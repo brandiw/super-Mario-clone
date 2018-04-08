@@ -10,12 +10,3 @@ export function loadMarioSprite() {
     });
 }
 
-export function loadBackgroundSprites() {
-    return loadImage('/image/tiles.png')
-    .then(image => {
-        const sprites = new SpriteSheet(image, 16, 16);
-        sprites.defineTile('ground', 0, 0); // locate Ground tiles
-        sprites.defineTile('sky', 3, 23); // locate Sky tile
-        return sprites;
-    });
-}

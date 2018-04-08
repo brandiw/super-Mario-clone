@@ -4,11 +4,11 @@ export default class Compositor {
       this.layers = [];
   }
 
-  draw(context) {
+  draw(context, compositor) {
 // layer is a function that draws on a context contains all the info to draw itself
       
       this.layers.forEach(layer => {
-          layer(context);
+          layer(context, compositor);
       });
   }
 }
