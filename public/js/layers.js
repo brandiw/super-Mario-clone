@@ -13,10 +13,6 @@ export function createBackgroundLayer(level, sprites) {
   // create only layers that we see
   function redraw(drawFrom, drawTo) {
 
-    if ( drawFrom === startIndex && drawTo === endIndex ) {
-        return;
-    }
-
     // vid 6 min 51
     startIndex = drawFrom;
     endIndex = drawTo
@@ -29,7 +25,12 @@ export function createBackgroundLayer(level, sprites) {
       //   checking id col exists
       if (col) {
         col.forEach((tile, y) => {
-          sprites.drawTile(tile.name, context, x - startIndex, y);
+          // if an animation has been defined than draw it vid7 min 38
+          if (sprites.animation.has(tileName)) {
+            sprites.drawAnim(tile.name, context, x - startIndex, y, level.totalTime);
+          } else {
+            sprites.drawTile(tile.name, context, x - startIndex, y);
+          }
         });
       }
     }

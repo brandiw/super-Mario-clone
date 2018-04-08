@@ -5,6 +5,8 @@ import {Matrix} from './math.js';
 export default class Level {
     constructor() {
         this.gravity = 2000;
+        // flash chance blocks vid7 min35 also lets us know how long the level has progressed
+        this.totalTime = 0;
     // vid 5 min 7
         this.comp = new Compositor();
         this.entities = new Set();
@@ -15,6 +17,7 @@ export default class Level {
         this.tileCollider = new TileCollider(this.tiles);
     }
 
+    // this is where we move things
     update(deltaTime) {
         this.entities.forEach(entity => {
             entity.update(deltaTime);
@@ -27,5 +30,6 @@ export default class Level {
 
             entity.vel.y += this.gravity * deltaTime;
         });
+        this.totalTime += deltaTime
     }
 }
