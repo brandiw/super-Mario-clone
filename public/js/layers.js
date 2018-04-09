@@ -1,8 +1,8 @@
-// import Matrix from "./Math.js";
+import TileResolver from './TileResolver.js';
 
-export function createBackgroundLayer(level, sprites) {
-  const tiles = level.tiles;
-  const resolver = level.tileCollider.tiles;
+
+export function createBackgroundLayer(level, tiles, sprites) {
+  const resolver = new TileResolver(tiles);
 
   const buffer = document.createElement("canvas");
   buffer.width = 256 + 16;
@@ -15,9 +15,9 @@ export function createBackgroundLayer(level, sprites) {
   // create only layers that we see
   function redraw(drawFrom, drawTo) {
 
-    // vid 6 min 51
-    startIndex = drawFrom;
-    endIndex = drawTo
+    context.clearRect(0, 0, buffer.width, buffer.height);
+
+        // console.log('Redrawing layer.js: 23')
     
 
     for (let x = startIndex; x <= endIndex; ++x) {

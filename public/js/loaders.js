@@ -37,6 +37,9 @@ export function loadSpriteSheet(name) {
 
       // if theres frames than loop over that
       if (sheetSpec.frames) {
+        // this is working
+        // console.log('looping frame, loaders', sheetSpec.frames)
+        
         sheetSpec.frames.forEach(frameSpec => {
           sprites.define(frameSpec.name, ...frameSpec.rect);
         });
@@ -49,7 +52,8 @@ export function loadSpriteSheet(name) {
           sprites.defineAnim(animSpec.name, animation);
         });
       }
-      // console.log('loaders:98', sprites)
+      console.log('loaders:52', name)
+      console.log('loaders:53', sprites)
 
       // sprites.defineTile('sky', 3, 23); // locate Sky tile
       return sprites;
