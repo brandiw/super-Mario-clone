@@ -1,3 +1,5 @@
+// import Matrix from "./Math.js";
+
 export function createBackgroundLayer(level, sprites) {
   const tiles = level.tiles;
   const resolver = level.tileCollider.tiles;
@@ -17,9 +19,7 @@ export function createBackgroundLayer(level, sprites) {
     startIndex = drawFrom;
     endIndex = drawTo
     
-    // console.log('Redrawing layer.js: 23')
 
-    // subset of tile matrix
     for (let x = startIndex; x <= endIndex; ++x) {
       const col = tiles.grid[x];
 
@@ -65,7 +65,6 @@ export function createSpriteLayer(entities, width = 64, height = 64) {
       spriteBufferContext.clearRect(0, 0, width, height);
 
       entity.draw(spriteBufferContext);
-      // vid6 min6
       context.drawImage(
         spriteBuffer,
         entity.pos.x - camera.pos.x,
@@ -74,7 +73,6 @@ export function createSpriteLayer(entities, width = 64, height = 64) {
     });
   };
 }
-//  create hit boxes
 export function createCollisionLayer(level) {
   const resolvedTiles = [];
 
@@ -116,9 +114,7 @@ export function createCollisionLayer(level) {
   };
 }
 
-// used for scrolling vid 6 min 38
-// cameraToDraw = rect that we draw
-// fromCamera = perspective to draw from
+
 export function createCameraLayer(cameraToDraw) {
   return function drawCameraRect(context, fromCamera) {
     context.strokeStyle = "purple";

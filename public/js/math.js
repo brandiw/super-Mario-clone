@@ -1,41 +1,42 @@
-export class Matrix {
+export default class Matrix {
   constructor() {
-    this.grid = [];
+      this.grid = [];
   }
 
-  // loop over tilesets
-  forEach(callBack) {
-    this.grid.forEach((column, x) => {
-      column.forEach((value, y) => {
-        callBack(value, x, y);
+    // loop over tilesets
+  forEach(callback) {
+      this.grid.forEach((column, x) => {
+          column.forEach((value, y) => {
+              callback(value, x, y);
+          });
       });
-    });
   }
 
   get(x, y) {
-    const col = this.grid[x];
-
-    if (col) {
-      return col[y];
-    }
-    return undefined;
+      const col = this.grid[x];
+      if (col) {
+          return col[y];
+      }
+      return undefined;
   }
-  // vid 5 mind 20:12 tile collision
+// vid 5 mind 20:12 tile collision
   set(x, y, value) {
-    if (!this.grid[x]) {
-      this.grid[x] = [];
-    }
-    this.grid[x][y] = value;
+      if (!this.grid[x]) {
+          this.grid[x] = [];
+      }
+
+      this.grid[x][y] = value;
   }
 }
-
 
 export class Vec2 {
-  constructor(x, y) {
-    this.set(x, y);
+    constructor(x, y) {
+        this.set(x, y);
+    }
+  
+    set(x, y) {
+        this.x = x;
+        this.y = y;
+    }
   }
-  set(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-}
+

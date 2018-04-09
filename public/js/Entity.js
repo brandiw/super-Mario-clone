@@ -1,4 +1,4 @@
-import { Vec2 } from "./math.js";
+import { Vec2 } from "./Math.js";
 
 // create semantic names for tiles sides
 export const Sides = {

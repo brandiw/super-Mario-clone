@@ -1,27 +1,27 @@
 import Compositor from './Compositor.js';
 import TileCollider from './TileCollider.js';
-import {Matrix} from './math.js';
 
 export default class Level {
     constructor() {
         this.gravity = 1500;
         // flash chance blocks vid7 min35 also lets us know how long the level has progressed
         this.totalTime = 0;
-    // vid 5 min 7
+// vid 5 min 7
         this.comp = new Compositor();
         this.entities = new Set();
-    // tile set source
-        
-        this.tiles = new Matrix();
+// tile set source
+        this.tileCollider = null;
+    }
 
-        this.tileCollider = new TileCollider(this.tiles);
+    setCollisionGrid(matrix) {
+        this.tileCollider = new TileCollider(matrix);
     }
 
     // this is where we move things
     update(deltaTime) {
         this.entities.forEach(entity => {
             entity.update(deltaTime);
-       //  vid 5 mind 112 collision detection
+            //  vid 5 mind 112 collision detection
             entity.pos.x += entity.vel.x * deltaTime;
             this.tileCollider.checkX(entity);
 
@@ -30,6 +30,7 @@ export default class Level {
 
             entity.vel.y += this.gravity * deltaTime;
         });
-        this.totalTime += deltaTime
+
+        this.totalTime += deltaTime;
     }
 }
