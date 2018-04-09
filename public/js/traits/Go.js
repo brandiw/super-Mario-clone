@@ -22,7 +22,15 @@ export default class Go extends Trait {
       // adding direction over time
       entity.vel.x += this.acceleration * deltaTime * this.dir;
 
-      this.heading = this.dir;
+      // prevent turning in air
+      if (entity.jump) {
+        if (entity.jump.falling === false) {
+          this.heading = this.dir;
+        }
+      } else {
+        this.heading = this.dir;
+      }
+
       // console.log("go.js:22", this.heading);
       this.distance += absX * deltaTime;
     } else if (entity.vel.x !== 0) {
@@ -35,5 +43,8 @@ export default class Go extends Trait {
     // increase drag with vel
     const drag = this.dragFactor * entity.vel.x * absX;
     entity.vel.x -= drag;
+
+    // calc distanvce regardless of what is pushed
+    this.distance += absX * deltaTime;
   }
 }

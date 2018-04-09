@@ -4,7 +4,7 @@ import {Matrix} from './math.js';
 
 export default class Level {
     constructor() {
-        this.gravity = 2000;
+        this.gravity = 1500;
         // flash chance blocks vid7 min35 also lets us know how long the level has progressed
         this.totalTime = 0;
     // vid 5 min 7
