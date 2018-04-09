@@ -3,7 +3,7 @@ import TileCollider from './TileCollider.js';
 
 export default class Level {
     constructor() {
-        this.gravity = 1500;
+        this.gravity = 2000;
         // flash chance blocks vid7 min35 also lets us know how long the level has progressed
         this.totalTime = 0;
 // vid 5 min 7

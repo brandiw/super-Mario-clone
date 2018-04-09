@@ -4,9 +4,6 @@ import Jump from './traits/Jump.js';
 import { loadSpriteSheet } from './loaders.js';
 import { createAnim } from './anim.js';
 
-const SLOW_DRAG = 1 / 1000;
-const FAST_DRAG = 1/ 5000; 
-
 
 export function createMario() {
     return loadSpriteSheet('mario')
@@ -25,22 +22,26 @@ export function createMario() {
 
             // take a number and gives back a frame 
             const runAnim = createAnim(['run-1', 'run-2', 'run-3'], 6);
-            // unsure why this isnt working
+
+            // vid 7 min 10 shitching between mario frames running vs idle
             function routeFrame(mario) {
+                // unsure about this 
                 if (mario.jump.falling) {
                     return 'jump';
                 }
 
+
                 if (mario.go.distance > 0) {
                     // used to make mario slide check agian vid 7 min 19
-                    if ((mario.vel.x > 0 && mario.go.dir < 0) || (mario.vel.x < 0 && mario.go.dir > 0)) {
+                    if ( (mario.vel.x > 0 && mario.go.dir< 0) || mario.vel.x < 0 && mario.go.dir > 0 ) {
                         return 'break';
                     }
+
+
                     console.log('frame stuff in entities.js:24')
                     return runAnim(mario.go.distance);
                 }
-
-                return 'idle';
+                return 'idle'
             }
 
             mario.draw = function drawMario(context) {

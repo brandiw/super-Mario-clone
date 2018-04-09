@@ -1,5 +1,4 @@
 import TileResolver from "./TileResolver.js";
-import { Sides } from "./Entity.js"
 
 export default class TileCollider {
   constructor(tileMatrix) {
@@ -69,17 +68,11 @@ export default class TileCollider {
         if (entity.pos.y + entity.size.y > match.y1) {
           entity.pos.y = match.y1 - entity.size.y;
           entity.vel.y = 0;
-
-          //  prevent flappy birds referanced in Entity.js
-          entity.obstruct(Sides.BOTTOM);
         }
       } else if (entity.vel.y < 0) {
         if (entity.pos.y < match.y2) {
           entity.pos.y = match.y2;
           entity.vel.y = 0;
-
-          // prevent flying agianst a wall 
-          entity.obstruct(Sides.TOP)
         }
       }
     });
