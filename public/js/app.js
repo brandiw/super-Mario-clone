@@ -1,6 +1,6 @@
 import Timer from "./Timer.js";
 import Camera from "./Camera.js";
-import { loadLevel } from "./loaders.js";
+import { loadLevel } from "./loaders/levels.js";
 import { createMario } from "./entities.js";
 //import { createCollisionLayer, createCameraLayer } from "./layers.js";
 import { setupKeyboard } from "./input.js";
@@ -32,8 +32,8 @@ Promise.all([createMario(), loadLevel("1-1")]).then(([mario, level]) => {
   timer.update = function update(deltaTime) {
     level.update(deltaTime);
 
-    if ( mario.pos.x > 100 ) {
-      camera.pos.x = mario.pos.x - 100
+    if (mario.pos.x > 100) {
+      camera.pos.x = mario.pos.x - 100;
     }
 
     level.comp.draw(context, camera);
