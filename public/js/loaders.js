@@ -15,7 +15,7 @@ export function loadImage(url) {
 }
 
 function loadJSON(url) {
-  fetch(url).then(r => r.json())
+ return fetch(url).then(r => r.json())
 }
 
 // vid 6 min 15 creating tiles and such
@@ -95,7 +95,8 @@ export function loadSpriteSheet(name) {
           sprites.defineAnim(animSpec.name, animation)
         })
       }
-      console.log('loaders:98', sprites)
+      // console.log('loaders:98', sprites)
+      
       // sprites.defineTile('sky', 3, 23); // locate Sky tile
       return sprites;
     });

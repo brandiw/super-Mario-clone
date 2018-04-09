@@ -16,7 +16,8 @@ export function createBackgroundLayer(level, sprites) {
     // vid 6 min 51
     startIndex = drawFrom;
     endIndex = drawTo
-    console.log('Redrawing layer.js: 23')
+    
+    // console.log('Redrawing layer.js: 23')
 
     // subset of tile matrix
     for (let x = startIndex; x <= endIndex; ++x) {
@@ -26,7 +27,7 @@ export function createBackgroundLayer(level, sprites) {
       if (col) {
         col.forEach((tile, y) => {
           // if an animation has been defined than draw it vid7 min 38
-          if (sprites.animation.has(tileName)) {
+          if (sprites.animation.has(tile)) {
             sprites.drawAnim(tile.name, context, x - startIndex, y, level.totalTime);
           } else {
             sprites.drawTile(tile.name, context, x - startIndex, y);
