@@ -12,7 +12,14 @@ export function loadLevel(name) {
       const level = new Level();
 
       //  create matrix for collision
-      createTiles(level, levelSpec.patterns);
+     for ( const {tile, x, y} of exapndTiles ) {
+         level.tiles.set(x, y, {
+             name: tile.name,
+             type: tile.type
+         })
+    
+    } 
+         
 
       const backgroundLayer = createBackgroundLayer(level, backgroundSprites);
       level.comp.layers.push(backgroundLayer);
@@ -61,7 +68,8 @@ function* expandRanges(range) {
 }
 
   // vid 6 min 15 creating tiles and such
-  function createTiles(level, tile, patterns) {
+  function exapndTiles(tile, patterns) {
+      const exapndedTiles = []
     //   vid 9 min 27 used to lessen the params in function above
     function walkTiles(tiles, offsetX, offsetY) {
 
@@ -75,14 +83,17 @@ function* expandRanges(range) {
               console.log("level.js:75", patterns[tile.pattern]);
               walkTiles(tiles,  derivedX, derivedY);
             } else {
-              level.tiles.set(derivedX, derivedY, {
-                name: tile.tile,
-                type: tile.type
-              });
-            }
+              exapndedTiles.push({}
+                  tile,
+                  x: derivedX,
+                  y: derivedY
+            })
+        
+            
           }
         }
       }
   }
   walkTiles(tiles, 0, 0)
+  return exapndedTiles
 }
